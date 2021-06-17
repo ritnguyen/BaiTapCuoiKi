@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<ModelEF.Model.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <i class="fa fa-desktop">&nbsp; Quản lý sản phẩm</i>
+}
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
+{
+    <div class="col-lg-12 form-group">
+        <div class="col-md-6">
+                @Html.ActionLink("Tạo mới", "Create", "Product", new { @class = "btn btn-danger" })
+            </div>
+        <div class="col-md-4">
+            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa cần tìm kiếm" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+        </div>
+    </div>
+}
+<div class="col-lg-12 form-group">
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Đơn giá
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                LoaiSP_ID
+            </th>
+            <th>Thao tác</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category_ID)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem chi tiết", "Detail","Product", new { @id = item.ID }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+</div>
+
