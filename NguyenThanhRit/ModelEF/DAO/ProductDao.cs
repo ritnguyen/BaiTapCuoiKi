@@ -34,6 +34,16 @@ namespace ModelEF.DAO
             return model.OrderBy(x => x.Quantity).OrderByDescending(x => x.UnitCost).ToPagedList(page, pagesize);
         }
 
+        public IEnumerable<Product> ListWhereAllNoPageList(string keysearch)
+        {
+            IQueryable<Product> model = db.Products;
+            if (!string.IsNullOrEmpty(keysearch))
+            {
+                model = model.Where(x => x.Name.Contains(keysearch));
+            }
+            return model.OrderBy(x => x.ID).ToList();
+        }
+
         public Product Find(int id)
         {
             return db.Products.Find(id);

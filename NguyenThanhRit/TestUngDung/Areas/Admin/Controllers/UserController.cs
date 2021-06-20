@@ -34,12 +34,14 @@ namespace TestUngDung.Areas.Admin.Controllers
             var result = dao.CheckDelete(status);
             if (result == 0)
             {
-                dao.Delete(id);               
+                dao.Delete(id);
+                SetAlert("Xóa người dùng thành công ", "success");
                 return RedirectToAction("Index");
                
             }
             else
-            {                               
+            {
+                SetAlert("Xóa người dùng không thành công ", "error");
                 return RedirectToAction("Index");
             }
             

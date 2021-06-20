@@ -90,6 +90,15 @@ namespace TestUngDung.Areas.Admin.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Showproduct(string searchString)
+        {
+            var product = new ProductDao();
+            var model = product.ListWhereAllNoPageList(searchString);
+            ViewBag.SearchString = searchString;
+            return View(model);
+        }
+
         public ActionResult ProductDetailes(int id)
         {
             var product = new ProductDao().Find(id);

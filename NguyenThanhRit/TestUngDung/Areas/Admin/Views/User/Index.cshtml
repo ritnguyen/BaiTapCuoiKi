@@ -2,7 +2,7 @@
 @using PagedList
 @model PagedList.IPagedList<ModelEF.Model.UserAccount>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý người dùng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -57,10 +57,10 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Ajax.ActionLink(" ","Delete",new { @id = item.ID , @status = item.Status},new AjaxOptions
+                    @Ajax.ActionLink(" ","Delete",new { @id = item.UserName , @status = item.Status},new AjaxOptions
             {
                 Confirm = "Bạn có muốn xóa bản ghi này?",
-                OnComplete="$('#row_"+@item.ID+"').remove()",
+                OnComplete="$('#row_"+@item.UserName+"').remove()",
                 HttpMethod="Delete"
             }, new { @class = "glyphicon glyphicon-trash"})
                 </td>
