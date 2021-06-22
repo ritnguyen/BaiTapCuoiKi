@@ -19,7 +19,7 @@ namespace TestUngDung.Areas.Admin.Controllers
         }
         // GET: Admin/Product
         // GET: Admin/User
-        public ActionResult Index(int page = 1, int pagesize = 5)
+        public ActionResult Index(int page = 1, int pagesize= 5 )
         {
             var product = new ProductDao();
             var model = product.ListAll();

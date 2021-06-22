@@ -47,26 +47,30 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category_ID)
-                </td>
-                <td>
-                    @Html.ActionLink("Xem chi tiết", "Detail","Product", new { @id = item.ID }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitCost)  VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category_ID)
+            </td>
+            <td>
+                @Html.ActionLink("Xem", "Detail", "Product", new { @id = item.ID }, new { @class = "btn btn-primary" })
+                |
+                @Html.ActionLink("Sửa", "Create", "Product", new { @id = item.ID }, new { @class = "btn btn-primary" })
+                |
+                @Html.ActionLink("Xóa", "", "Product", new { @id = item.ID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
         }
 
     </table>

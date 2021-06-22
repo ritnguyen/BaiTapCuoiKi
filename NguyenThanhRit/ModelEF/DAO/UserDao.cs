@@ -20,16 +20,20 @@ namespace ModelEF.DAO
         public int login(string user, string pass)
         {
             var result = db.UserAccounts.SingleOrDefault(x => x.UserName.Contains(user) && x.Password.Contains(pass));
+            var result2 = db.UserAccounts.Where(x => x.Status == "Blocked").SingleOrDefault(x => x.UserName.Contains(user) && x.Password.Contains(pass));
             if (result == null)
             {
                 return 0;
             }
-            else
+            else if(result2==null)
             {
                 return 1;
             }
+            else
+            {
+                return 2;
+            }
         }
-
 
         public List<UserAccount> ListAll()
         {
@@ -48,24 +52,28 @@ namespace ModelEF.DAO
         }
 
 
-        //public string Insert(UserAccount entityUser)
-        //{
-        //    var user = db.UserAccounts.Find(entityUser.UserName);
-        //    if (user == null)
-        //    {
-        //        db.UserAccounts.Add(entityUser);
-        //    }
-        //    else
-        //    {
-        //        user.UserName = entityUser.UserName;
-        //        if (!String.IsNullOrEmpty(entityUser.Password))
-        //        {
-        //            user.Password = entityUser.Password;
-        //        }
-        //    }
-        //    db.SaveChanges();
-        //    return entityUser.UserName;
-        //}
+        public string Insert(UserAccount entityUser)
+        {
+            var user = db.UserAccounts.Find(entityUser.UserName);
+            if (user == null)
+            {
+                db.UserAccounts.Add(entityUser);
+            }
+            else
+            {
+                user.UserName = entityUser.UserName;
+                if (!String.IsNullOrEmpty(entityUser.Password))
+                {
+                    user.Password = entityUser.Password;
+                }
+                if(!String.IsNullOrEmpty(entityUser.Status))
+                {
+                    user.Status = entityUser.Status;
+                }
+            }
+            db.SaveChanges();
+            return entityUser.UserName;
+        }
 
         public bool Delete(string id)
         {

@@ -32,9 +32,13 @@ namespace TestUngDung.Areas.Admin.Controllers
                     return RedirectToAction("Index", "Home");
 
                 }
-                else
+                else if(result == 2)
                 {
-                    ModelState.AddModelError("", "Đăng nhập không thành công");
+                    ModelState.AddModelError("", " Tài khoản đang bị khóa");
+                }
+                if(result==0)
+                {
+                    ModelState.AddModelError("", " Tài khoản hoặc mật khẩu sai");
                 }
             }
             return View("Index");
